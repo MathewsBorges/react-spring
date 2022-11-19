@@ -19,12 +19,16 @@ function SalesCard() {
 
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/sales`)
+
+        const dmin = minDate.toISOString().slice(0,10);
+        const dmax = maxDate.toISOString().slice(0,10);
+
+        axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
             .then(response => {
                 setSales(response.data.content)
 
             })
-    }, []);
+    }, [minDate, maxDate]);
 
 
 
@@ -79,7 +83,7 @@ function SalesCard() {
                                         <td>R$ {sale.amount.toFixed(2)}</td>
                                         <td>
                                             <div className="dsmeta-red-btn-container">
-                                                <NotificationButton />
+                                                <NotificationButton saleId={sale.id}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -95,7 +99,7 @@ function SalesCard() {
                             <td>R$ 55300.00</td>
                             <td>
                                 <div className="dsmeta-red-btn-container">
-                                    <NotificationButton />
+                                    <NotificationButton saleId={3}/>
                                 </div>
                             </td>
                         </tr>
@@ -108,7 +112,7 @@ function SalesCard() {
                             <td>R$ 55300.00</td>
                             <td>
                                 <div className="dsmeta-red-btn-container">
-                                    <NotificationButton />
+                                    <NotificationButton saleId={1}/>
 
                                 </div>
                             </td>
@@ -122,7 +126,7 @@ function SalesCard() {
                             <td>R$ 55300.00</td>
                             <td>
                                 <div className="dsmeta-red-btn-container">
-                                    <NotificationButton />
+                                    <NotificationButton saleId={2}/>
 
                                 </div>
                             </td>
